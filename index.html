@@ -89,13 +89,12 @@
       loadingDiv.style.display = 'block'; // Show loading
 
       try {
-        const response = await fetch(`https://4324-41-46-156-159.ngrok-free.app/ResetPassword/${password}`, {
+        const response = await fetch(`https://014f-156-215-160-182.ngrok-free.app/api/Auth/ResetPassword/${password}`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
-
         if (response.ok) {
           alert('Password reset successfully!');
           form.reset();
