@@ -4,14 +4,11 @@
   <meta charset="UTF-8">
   <title>Reset Password</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0}
+    body { font-family: Arial, sans-serif; margin: 0 }
     input, button { margin: 10px 0; padding: 10px; width: 300px; }
     .error { color: red; }
     #loading { display: none; color: blue; }
-    
-    /* بار رأس الصفحة */
     .header {
-      
       color: white;
       padding: 10px 20px;
       display: flex;
@@ -32,11 +29,11 @@
       padding: 20px;
       text-align: center;
     }
-    input{
+    input {
       color: RGB(137, 207, 240);
     }
-    button{
-      color : RGB(137, 207, 240);
+    button {
+      color: RGB(137, 207, 240);
       border: none;
       cursor: pointer;
     }
@@ -46,6 +43,7 @@
   </style>
 </head>
 <body>
+
   <!-- بار الرأس -->
   <div class="header">
     <h1 style="color: RGB(137, 207, 240);">Pet Home</h1>
@@ -54,7 +52,7 @@
   <div class="container">
     <h1 style="color: RGB(137, 207, 240);">Reset Password</h1>
     <form id="resetForm">
-      <input type="password" id="password" placeholder="New Password" required ><br>
+      <input type="password" id="password" placeholder="New Password" required><br>
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required><br>
       <div id="error" class="error"></div>
       <div id="loading">Loading...</div>
@@ -63,8 +61,9 @@
   </div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
+    // قراءة التوكين من URL
+    const path = window.location.pathname.substring(1); // يشيل الـ "/"
+    const token = path || null;
 
     const form = document.getElementById('resetForm');
     const loadingDiv = document.getElementById('loading');
@@ -85,8 +84,8 @@
         return;
       }
 
-      errorDiv.textContent = ""; // clear previous errors
-      loadingDiv.style.display = 'block'; // Show loading
+      errorDiv.textContent = "";
+      loadingDiv.style.display = 'block';
 
       try {
         const response = await fetch(`https://014f-156-215-160-182.ngrok-free.app/api/Auth/ResetPassword/${password}`, {
@@ -95,6 +94,7 @@
             'Authorization': `Bearer ${token}`
           }
         });
+
         if (response.ok) {
           alert('Password reset successfully!');
           form.reset();
@@ -105,9 +105,10 @@
       } catch (error) {
         errorDiv.textContent = 'Network error.';
       } finally {
-        loadingDiv.style.display = 'none'; // Hide loading
+        loadingDiv.style.display = 'none';
       }
     });
   </script>
+
 </body>
 </html>
