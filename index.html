@@ -94,7 +94,7 @@
             'Authorization': `Bearer ${token}`
           }
         });
-
+        console.log(response);
         if (response.ok) {
           alert('Password reset successfully!');
           form.reset();
