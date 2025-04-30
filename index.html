@@ -14,16 +14,6 @@
       display: flex;
       align-items: center;
     }
-    .header a {
-      color: white;
-      text-decoration: none;
-      font-size: 20px;
-      margin-left: 10px;
-    }
-    .header img {
-      height: 30px;
-      width: 30px;
-    }
     .container {
       margin-top: 20px;
       padding: 20px;
@@ -44,7 +34,7 @@
 </head>
 <body>
 
-  <!-- بار الرأس -->
+  <!-- Header -->
   <div class="header">
     <h1 style="color: RGB(137, 207, 240);">Pet Home</h1>
   </div>
@@ -61,9 +51,9 @@
   </div>
 
   <script>
-    // قراءة التوكين من URL
-    const path = window.location.pathname.substring(1); // يشيل الـ "/"
-    const token = path || null;
+    // قراءة التوكين من الـ PATH
+    const path = window.location.pathname;
+    const token = path && path !== "/" ? path.slice(1) : null; // يشيل الـ / ويجيب التوكين
 
     const form = document.getElementById('resetForm');
     const loadingDiv = document.getElementById('loading');
@@ -94,7 +84,7 @@
             'Authorization': `Bearer ${token}`
           }
         });
-        console.log(response);
+
         if (response.ok) {
           alert('Password reset successfully!');
           form.reset();
